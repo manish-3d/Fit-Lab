@@ -1,18 +1,46 @@
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 import FeatureCard from "../components/FeatureCard";
 
 export default function Home() {
+  const scrollRef = useRef();
+
+  const scroll = (direction) => {
+    const container = scrollRef.current;
+    const scrollAmount = container.clientWidth;
+
+    container.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div style={container}>
 
-      {/* 🔥 FEATURES */}
+      {/* 🔥 FEATURES SLIDER */}
       <section style={featureSection}>
         <h2 style={sectionTitle}>Everything You Need</h2>
 
-        <div style={grid}>
-          <FeatureCard title="Gym Finder" />
-          <FeatureCard title="Progress Tracking" />
-          <FeatureCard title="Planner" />
+        <div style={sliderWrapper}>
+
+          <button onClick={() => scroll("left")} style={arrowBtn}>
+            ◀
+          </button>
+
+          <div ref={scrollRef} style={scrollContainer}>
+            <FeatureCard title="Gym Finder" />
+            <FeatureCard title="Progress Tracking" />
+            <FeatureCard title="Planner" />
+            <FeatureCard title="Diet Plan" />
+            <FeatureCard title="Workout Logs" />
+            <FeatureCard title="AI Coach" />
+          </div>
+
+          <button onClick={() => scroll("right")} style={arrowBtn}>
+            ▶
+          </button>
+
         </div>
       </section>
 
@@ -70,10 +98,6 @@ export default function Home() {
   );
 }
 
-//
-// 🔥 COMPONENTS
-//
-
 function Stat({ number, label }) {
   return (
     <div style={statCard}>
@@ -83,9 +107,7 @@ function Stat({ number, label }) {
   );
 }
 
-//
-// 🎨 STYLES
-//
+/* 🎨 STYLES */
 
 const container = {
   maxWidth: "1100px",
@@ -115,11 +137,29 @@ const subText = {
   marginTop: "10px",
 };
 
-const grid = {
+const sliderWrapper = {
   display: "flex",
-  justifyContent: "center",
-  gap: "40px",
-  flexWrap: "wrap",
+  alignItems: "center",
+  gap: "0px",
+};
+
+const scrollContainer = {
+  display: "flex",
+  gap: "30px",
+  overflowX: "auto",
+  scrollBehavior: "smooth",
+  padding: "40px 20px",
+  scrollSnapType: "x mandatory",
+  justifyContent: "center",   // 🔥 CENTER ALIGN
+};
+const arrowBtn = {
+  background: "#121212",
+  color: "#00ff88",
+  border: "1px solid #222",
+  borderRadius: "50%",
+  width: "40px",
+  height: "40px",
+  cursor: "pointer",
 };
 
 const statsGrid = {

@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import bgImage from "../assets/ok_remo_e_202604031403.png"; // ✅ adjust path if needed
-import bg frommobile "C:\Users\manis\Downloads\theodinproject-4lfy\fitlab\src\assets\and_for_mobile_202604031427.png"
+import bgphone from  "../assets/and_for_mobile_202604031427.png";
 export default function Hero() {
+  const isMobile = window.innerWidth < 768;
   return (
+    
     <section style={heroStyle}>
       
       {/* 🔥 DARK OVERLAY */}
@@ -47,7 +49,7 @@ const heroStyle = {
   textAlign: "center",
   overflow: "hidden",
 
-  backgroundImage: `url(${bgImage})`, // ✅ correct usage
+  backgroundImage: `url(${isMobile ? bgphone: bgImage})`, // ✅ correct usage
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",

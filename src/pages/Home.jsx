@@ -1,10 +1,36 @@
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import FeatureCard from "../components/FeatureCard";
 
 export default function Home() {
   const scrollRef = useRef();
+  const [isDown, setIsDown] = useState(false);
+const [startX, setStartX] = useState(0);
+const [scrollLeft, setScrollLeft] = useState(0);
 
+const handleMouseDown = (e) => {
+  setIsDown(true);
+  setStartX(e.pageX - scrollRef.current.offsetLeft);
+  setScrollLeft(scrollRef.current.scrollLeft);
+};
+
+const handleMouseLeave = () => {
+  setIsDown(false);
+};
+
+const handleMouseUp = () => {
+  setIsDown(false);
+};
+
+const handleMouseMove = (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+
+  const x = e.pageX - scrollRef.current.offsetLeft;
+  const walk = (x - startX) * 1.5; // speed
+
+  scrollRef.current.scrollLeft = scrollLeft - walk;
+};
   const scroll = (direction) => {
     const container = scrollRef.current;
     const scrollAmount = container.clientWidth;

@@ -155,7 +155,9 @@ const section = {
 
 const sectionTitle = {
   fontSize: "26px",
-  marginBottom: "30px",
+  marginBottom: "50px",
+  position: "relative",
+  top: "-50px", // 🔥 moves upward
 };
 
 const subText = {

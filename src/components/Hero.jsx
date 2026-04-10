@@ -1,16 +1,55 @@
 import { Link } from "react-router-dom";
-import bgImage from "../assets/ok_remo_e_202604031403.png"; // ✅ adjust path if needed
-import bgphone from  "../assets/and_for_mobile_202604031427.png";
+import { useState, useEffect } from "react";
+import Navbar from "./Navbar";
+
+import bgImage from "../assets/ok_remo_e_202604031403.png";
+import bgphone from "../assets/and_for_mobile_202604031427.png";
+
 export default function Hero() {
-  const isMobile = window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const heroStyle = {
+    position: "relative",
+    padding: isMobile ? "100px 20px" : "140px 20px",
+    textAlign: "center",
+    overflow: "hidden",
+
+    backgroundImage: `url(${isMobile ? bgphone : bgImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: isMobile ? "center top" : "center",
+    backgroundRepeat: "no-repeat",
+  };
+
   return (
-    
     <section style={heroStyle}>
       
-      {/* 🔥 DARK OVERLAY */}
+      {/* ✅ NAVBAR (FIXED) */}
+      <Navbar
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          display: "flex",
+          justifyContent: "flex-start",
+          padding: "20px 30px",
+          zIndex: 10, // 🔥 FIX CLICK ISSUE
+        }}
+      />
+
+      {/* 🔥 OVERLAY (CLICK SAFE) */}
       <div style={overlayStyle}></div>
 
-      {/* ✨ BACKGROUND GLOW */}
+      {/* ✨ GLOW */}
       <div style={glowStyle}></div>
 
       {/* 📦 CONTENT */}
@@ -43,26 +82,15 @@ export default function Hero() {
 // 🎨 STYLES
 //
 
-const heroStyle = {
-  position: "relative",
-  padding: "140px 20px",
-  textAlign: "center",
-  overflow: "hidden",
-
-  backgroundImage: `url(${isMobile ? bgphone: bgImage})`, // ✅ correct usage
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-};
-
 const overlayStyle = {
   position: "absolute",
   top: 0,
   left: 0,
   width: "100%",
   height: "100%",
-  background: "rgba(0, 0, 0, 0.6)", // 🔥 controls darkness
+  background: "rgba(0, 0, 0, 0.6)",
   zIndex: 0,
+  pointerEvents: "none", // 🔥 IMPORTANT FIX
 };
 
 const glowStyle = {

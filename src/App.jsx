@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home.jsx";
 import Gyms from "./pages/Gyms.jsx";
@@ -6,13 +6,12 @@ import Dashboard from "./pages/Dashboard.jsx";
 import GymDetails from "./pages/GymDetails.jsx";
 import Planner from "./pages/Planner.jsx";
 
-import Hero from "./components/Hero.jsx"; // your card component
+import Hero from "./components/Hero.jsx";
 import Navbar from "./components/Navbar.jsx";
 
 function App() {
   return (
-    <HashRouter>
-
+    <BrowserRouter>
       <Navbar />
 
       <Routes>
@@ -20,40 +19,49 @@ function App() {
           path="/"
           element={
             <div>
-              <Hero/>
+              <Hero />
               <Home />
-              <div
-  style={{
-    marginTop: "80px",
-    padding: "30px",
-    borderTop: "1px solid #222",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap: "20px",
-  }}
->
-  {/* LEFT */}
-  <div>
-    <h3 style={{ marginBottom: "10px" }}>FitLab</h3>
-    <p style={{ color: "#aaa" }}>
-      Train smarter. Build stronger.
-    </p>
-  </div>
+              <div style={footerStyle}>
+                <div>
+                  <h3 style={{ marginBottom: "10px" }}>FitLab</h3>
+                  <p style={{ color: "#aaa" }}>Train smarter. Build stronger.</p>
+                </div>
 
-  {/* RIGHT (SOCIAL LINKS) */}
-  <div style={{ display: "flex", gap: "20px" }}>
-    <a onMouseEnter={(e) => (e.target.style.color = "#00ff88")}
-onMouseLeave={(e) => (e.target.style.color = "#aaa")} href="#" style={linkStyle}>🐦 Twitter</a>
-    <a onMouseEnter={(e) => (e.target.style.color = "#00ff88")}
-onMouseLeave={(e) => (e.target.style.color = "#aaa")} href="#" style={linkStyle}>📸 Instagram</a>
-    <a onMouseEnter={(e) => (e.target.style.color = "#00ff88")}
-onMouseLeave={(e) => (e.target.style.color = "#aaa")} href="#" style={linkStyle}>👽 Reddit</a>
-    <a onMouseEnter={(e) => (e.target.style.color = "#00ff88")}
-onMouseLeave={(e) => (e.target.style.color = "#aaa")}href="mailto:support@fitlab.com" style={linkStyle}>✉️ Email</a>
-  </div>
-</div>
+                <div style={{ display: "flex", gap: "20px" }}>
+                  <a
+                    onMouseEnter={(e) => (e.target.style.color = "#00ff88")}
+                    onMouseLeave={(e) => (e.target.style.color = "#aaa")}
+                    href="#"
+                    style={linkStyle}
+                  >
+                    🐦 Twitter
+                  </a>
+                  <a
+                    onMouseEnter={(e) => (e.target.style.color = "#00ff88")}
+                    onMouseLeave={(e) => (e.target.style.color = "#aaa")}
+                    href="#"
+                    style={linkStyle}
+                  >
+                    📸 Instagram
+                  </a>
+                  <a
+                    onMouseEnter={(e) => (e.target.style.color = "#00ff88")}
+                    onMouseLeave={(e) => (e.target.style.color = "#aaa")}
+                    href="#"
+                    style={linkStyle}
+                  >
+                    👽 Reddit
+                  </a>
+                  <a
+                    onMouseEnter={(e) => (e.target.style.color = "#00ff88")}
+                    onMouseLeave={(e) => (e.target.style.color = "#aaa")}
+                    href="mailto:support@fitlab.com"
+                    style={linkStyle}
+                  >
+                    ✉️ Email
+                  </a>
+                </div>
+              </div>
             </div>
           }
         />
@@ -63,10 +71,21 @@ onMouseLeave={(e) => (e.target.style.color = "#aaa")}href="mailto:support@fitlab
         <Route path="/planner" element={<Planner />} />
         <Route path="/gym/:id" element={<GymDetails />} />
       </Routes>
-
-    </HashRouter>
+    </BrowserRouter>
   );
 }
+
+const footerStyle = {
+  marginTop: "80px",
+  padding: "30px",
+  borderTop: "1px solid #222",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  flexWrap: "wrap",
+  gap: "20px",
+};
+
 const linkStyle = {
   textDecoration: "none",
   color: "#aaa",

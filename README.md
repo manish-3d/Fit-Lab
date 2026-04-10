@@ -15,3 +15,20 @@ The React Compiler is not enabled on this template because of its impact on dev 
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 # Fit-Lab
+
+## Deployment quick notes
+
+If the app "builds but does not open correctly" after deployment, the most common issue is SPA routing.
+This project now uses `HashRouter`, so static hosts (GitHub Pages, Netlify static publish, S3 static sites, etc.) do not need server-side rewrite rules for client-side routes.
+
+### Deploy checklist
+
+1. Install dependencies: `npm install`
+2. Build production output: `npm run build`
+3. Publish the `dist/` folder as your site output directory
+
+### Common platform settings
+
+- **Vercel**: Framework preset = `Vite`; build command = `npm run build`; output directory = `dist`
+- **Netlify**: Build command = `npm run build`; publish directory = `dist`
+- **GitHub Pages**: Deploy the generated `dist` contents (or use a GH Pages workflow that publishes `dist`)

@@ -1,25 +1,24 @@
 import { Link } from "react-router-dom";
-import bgImage from "../assets/ok_remo_e_202604031403.png"; // ✅ adjust path if needed
-import bgphone from  "../assets/and_for_mobile_202604031427.png";
+import bgImage from "../assets/ok_remo_e_202604031403.png";
+import bgphone from "../assets/and_for_mobile_202604031427.png";
+
 export default function Hero() {
   const isMobile = window.innerWidth < 768;
-  return (
-    
-    <section style={heroStyle}>
-      
-      {/* 🔥 DARK OVERLAY */}
-      <div style={overlayStyle}></div>
 
-      {/* ✨ BACKGROUND GLOW */}
+  const heroStyle = {
+    ...baseHeroStyle,
+    backgroundImage: `url(${isMobile ? bgphone : bgImage})`,
+  };
+
+  return (
+    <section style={heroStyle}>
+      <div style={overlayStyle}></div>
       <div style={glowStyle}></div>
 
-      {/* 📦 CONTENT */}
       <div style={contentStyle}>
         <h1 style={titleStyle}>FitLab</h1>
 
-        <h2 style={subtitleStyle}>
-          Train Smarter. Track Better.
-        </h2>
+        <h2 style={subtitleStyle}>Train Smarter. Track Better.</h2>
 
         <p style={descStyle}>
           Discover gyms, manage workouts, and track your fitness journey.
@@ -39,17 +38,11 @@ export default function Hero() {
   );
 }
 
-//
-// 🎨 STYLES
-//
-
-const heroStyle = {
+const baseHeroStyle = {
   position: "relative",
   padding: "140px 20px",
   textAlign: "center",
   overflow: "hidden",
-
-  backgroundImage: `url(${isMobile ? bgphone: bgImage})`, // ✅ correct usage
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
@@ -61,7 +54,7 @@ const overlayStyle = {
   left: 0,
   width: "100%",
   height: "100%",
-  background: "rgba(0, 0, 0, 0.6)", // 🔥 controls darkness
+  background: "rgba(0, 0, 0, 0.6)",
   zIndex: 0,
 };
 

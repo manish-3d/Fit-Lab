@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home.jsx";
 import Gyms from "./pages/Gyms.jsx";
@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar.jsx";
 
 function App() {
   return (
-    <BrowserRouter >
+    <HashRouter>
 
       <Navbar />
 
@@ -64,7 +64,7 @@ onMouseLeave={(e) => (e.target.style.color = "#aaa")}href="mailto:support@fitlab
         <Route path="/gym/:id" element={<GymDetails />} />
       </Routes>
 
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 const linkStyle = {
